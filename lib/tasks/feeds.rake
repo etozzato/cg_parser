@@ -27,7 +27,7 @@ task :update_feeds do
       last_post = feed.posts.first
       feed_handler.entries.each do |entry|
         if last_post.nil? || last_post.published < entry.published
-          puts entry.title
+          #puts entry.title
           feed.add_entry(entry) if entry.title =~ /porsche/i
         end
       end
