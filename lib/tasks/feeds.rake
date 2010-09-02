@@ -1,3 +1,6 @@
+# */5 * * * * cd /home/etozzato/myporsche.us && export RAILS_ENV=production && rake update_feeds
+
+
 require 'config/environment'
 require 'feedzirra'
 
