@@ -14,7 +14,7 @@ end
 
 desc 'update_feeds'
 task :update_feeds do
-  feed_list = Feed.find(:all, :limit => 30, 
+  feed_list = Feed.find(:all, :limit => 60, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
   feed_urls = feed_list.collect {|el| el.url }

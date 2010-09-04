@@ -2,6 +2,12 @@
 %html
   %head
     %title #{page_title}
+    %meta{:name => 'description', :value => 'Search for used and new cars: audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen in 115 aggregated craigslist feeds! Albany Allentown Albuquerque Anchorage Ann Arbor Asheville Atlanta Austin Bakersfield Baltimore Baton Rouge Birmingham Boise Boston Buffalo Burlington Champaign Urbana Charleston Charlotte Chicago Chico Cincinnati Cleveland Columbia, S.C. Columbus Dallas Delaware Dayton Denver / Boulder Des moines Detroit El Paso Eugene Fort Myers / SW Florida Fresno Grand Rapids Greensboro Harrisburg Hartford Houston Honolulu Humboldt Indianapolis Inland Empire Ithaca Jackson Jacksonville Kansas City Knoxville Little Rock Las Vegas Lexington Los Angeles Louisville Maine Madison Memphis Miami Milwaukee Minneapolis Mobile Modesto Montana Monterey Montgomery Nashville New Hampshire New Haven New Jersey New York City New Orleans Norfolk North Dakota Oklahoma City Omaha Orange County Orlando Pensacola Philadelphia Phoenix Pittsburgh Portland Puerto Rico Providence Raleigh Redding Reno Richmond Rochester Sacramento Salt Lake City San Antonio San Diego San Francisco Bay Area San Luis Obispo Santa Barbara Savannah Seattle-Tacoma Shreveport South Dakota Spokane St. Louis Stockton Syracuse Tallahassee Tampa Toledo Tucson Tulsa Washington D.C. Western Massachusetts West Palm Beach West Virginia Wichita Wyoming'}
+    %meta{:name =>'keywords', :value => 'new and used cars, audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen'}
     = javascript_include_tag('jquery')
+    = stylesheet_link_tag :all, :cache => true
   %body
     = yield
+
+#footer
+  = render 'shared/footer'
