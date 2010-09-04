@@ -1,16 +1,16 @@
-%h2 myporsche.us (#{@posts.total_entries})
-%h4 Last Update #{Time.now.utc}
+%h2
+  = CONFIG[:title]
+  (#{@posts.total_entries})
 
--#%p
--#  = render :partial => 'shared/simple_search'
+%h4 Last Update #{Time.now.utc}
 
 - @posts.each do |p|
   %p 
-    =link_to(p.title, p.post_url, :target => '_new')
+    = link_to(p.title, p.post_url, :target => '_new')
     = number_to_currency(p.price, :precision => 0)
     = h_date(p.published)
     in 
     %strong 
       = p.feed_name.titleize
       
-= will_paginate(@posts)
+= will_paginate(@posts) 
