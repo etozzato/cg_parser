@@ -6,7 +6,7 @@ module ApplicationHelper
   end
   
   def page_title
-    'CarStream&trade; - Porsche for sale in the USA'
+    "MyStream&trade; - #{CONFIG[:make]||CONFIG[:reg_exp].titleize} for sale in the USA"
   end
   
 end
