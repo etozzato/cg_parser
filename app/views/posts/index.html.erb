@@ -1,5 +1,5 @@
 <h2>
-  <%= CONFIG[:title] %> ( <%= @posts.total_entries %>)
+  <%= CONFIG[:title] %> (<%= @posts.total_entries %>)
 </h2>
 
 <h4>Last Update <%= Time.now.utc %></h4>
@@ -13,4 +13,5 @@
     <%= h_date(p.published) %>
     in <strong><%= p.feed_name.titleize %></strong>
 <% end -%>
+
 <%= will_paginate(@posts) %>
