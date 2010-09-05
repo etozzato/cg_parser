@@ -1,4 +1,4 @@
-require 'config/environment'
+require 'config/environment.rb'
 require 'feedzirra'
 
 desc 'register_feeds'
