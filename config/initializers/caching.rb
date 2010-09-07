@@ -1,4 +1,4 @@
-require 'rack/cache.rb'
+require 'rack/cache'
 if Rails.env != 'development'
   host = 'localhost'
   port = 11211
