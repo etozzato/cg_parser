@@ -9,5 +9,5 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
   config.database_configuration_file = 'settings/database.yml'
 end
-require "will_paginate"
+require "will_paginate" unless defined?(RAKE_CMD)
 require 'settings/base.rb'
