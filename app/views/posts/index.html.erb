@@ -1,4 +1,4 @@
-<p class='last_update'>Last Update <%= Time.now.utc %></p>
+<p class='last_update'>Last Update <%= Time.now.strftime("%b %d at %I:%M %P") %></p>
 <div style="clear:both;"></div>
 
 <%= will_paginate(@posts) %>
