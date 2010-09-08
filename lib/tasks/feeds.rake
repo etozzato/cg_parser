@@ -8,7 +8,6 @@ task :gem_path do
   puts `echo $SHELL`
   puts `gem env`
   puts `gem list`
-  require 'feedzirra'
 end
 
 desc 'register_feeds'
@@ -24,6 +23,7 @@ end
 
 desc 'update_feeds'
 task :update_feeds do
+  require 'feedzirra'
   feed_list = Feed.find(:all, :limit => 60, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
