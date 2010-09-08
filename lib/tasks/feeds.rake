@@ -1,5 +1,5 @@
 require 'config/environment.rb'
-#require 'feedzirra'
+require 'feedzirra'
 
 task :gem_path do
   puts 'this is gem_path: ' + ENV['GEM_PATH']
