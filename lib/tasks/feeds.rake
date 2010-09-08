@@ -44,7 +44,7 @@ task :update_feeds do
   Feed.set_table_name(app.gsub(/\W/,'') + '_feeds'.to_sym)
   Post.set_table_name(app.gsub(/\W/,'') + '_posts'.to_sym)
 
-  feed_list = Feed.find(:all, :limit => 1, 
+  feed_list = Feed.find(:all, :limit => 60, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
   feed_urls = feed_list.collect {|el| el.url }
