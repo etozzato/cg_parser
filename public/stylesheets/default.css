@@ -77,7 +77,7 @@ blockquote {
   padding-left:25px;
 }
 
-#search {width:580px;margin:0px auto;margin-bottom:20px;}
+#search {width:580px;margin:0px auto;margin-bottom:20px;margin-top:20px;}
 #footer {background:#fff; width:840px; margin:0px auto; font-size:8pt;padding:6px;margin-bottom:20px;}
 
 .last_update {float:right; font-style:italic; font-size:small; font-weight:bold;}
