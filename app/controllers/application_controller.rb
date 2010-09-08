@@ -1,10 +1,13 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
+  before_filter :set_app_name
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
 
-  # Scrub sensitive parameters from your log
-  # filter_parameter_logging :password
+  private
+  def set_app_name
+    @app_name ||= request.env['SERVER_NAME'].gsub(/^stage\./,'').gsub(/\.us$/,'').clean
+    Post.set_table_name(@app_name + '_posts')
+    Feed.set_table_name(@app_name + '_feeds')
+  end
+
 end

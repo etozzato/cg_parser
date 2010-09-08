@@ -12,26 +12,46 @@ end
 
 desc 'register_feeds'
 task :register_feeds do
-  
-  markets = Cg::MARKETS.keys
-  markets.each do |m|
-    puts m.to_s
-    Feed.add(m.to_s)
+  Settings::APPLICATIONS.each do |app|
+    Feed.set_table_name(app.gsub(/\W/,'') + '_feeds'.to_sym)
+    markets = Settings::MARKETS.keys
+    markets.each do |m|
+      puts "#{m} -> #{app}"
+      Feed.add(m.to_s)
+    end
   end
-  
 end
 
 desc 'update_feeds'
 task :update_feeds do
   require 'feedzirra'
-  feed_list = Feed.find(:all, :limit => 60, 
+
+  update_id   = File.join(RAILS_ROOT, 'log', 'update.id')
+  update_log  = File.join(RAILS_ROOT, 'log', 'update.log')
+  
+  if File.exist?(update_id)
+    feed_id = File.read(update_id).to_i
+    `echo '#{feed_id+1}' > #{update_id}`
+    if feed_id > Settings::APPLICATIONS.size-1
+      feed_id = 0
+      `echo '#{feed_id+1}' > #{update_id}`
+    end else
+    feed_id = 0
+    `echo '#{feed_id+1}' > #{update_id}` 
+  end
+
+  app = Settings::APPLICATIONS[feed_id]
+  Feed.set_table_name(app.gsub(/\W/,'') + '_feeds'.to_sym)
+  Post.set_table_name(app.gsub(/\W/,'') + '_posts'.to_sym)
+
+  feed_list = Feed.find(:all, :limit => 1, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
   feed_urls = feed_list.collect {|el| el.url }
   parsed_feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
   
-  reg_exp =  Regexp.new(CONFIG[:reg_exp], true)
-  
+  reg_exp =  Regexp.new(Settings::CONFIG[app.gsub(/\W/,'').to_sym][:reg_exp], true)
+  new_posts = 0
   feed_list.each do |feed|
     feed_handler = parsed_feeds[feed.url]
     
@@ -57,10 +77,12 @@ task :update_feeds do
         if last_post.nil? || last_post.published < published
           if entry.title =~ reg_exp
             puts entry.title
-            feed.add_entry(entry) 
+            feed.add_entry(entry)
+            new_posts += 1
           end
         end
       end
     end
   end
+  `echo '#{new_posts} new posts for #{app}' >> #{update_log}`
 end

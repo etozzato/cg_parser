@@ -7,7 +7,6 @@ require File.join(File.dirname(__FILE__), 'boot.rb')
 
 Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
-  config.database_configuration_file = 'settings/database.yml'
 end
+
 require 'will_paginate'
-require File.join(File.dirname(__FILE__), '../', 'settings/base.rb')

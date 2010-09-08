@@ -1,5 +1,5 @@
 <h2>
-  <%= CONFIG[:title] %> (<%= @posts.total_entries %>)
+  <%= Settings::CONFIG[@app_name.to_sym][:title] %> (<%= @posts.total_entries %>)
 </h2>
 
 <h4>Last Update <%= Time.now.utc %></h4>
