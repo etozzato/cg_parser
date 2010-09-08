@@ -3,6 +3,8 @@
 
 <%= will_paginate(@posts) %>
 
+<%= render :partial => 'shared/search' %>
+
 <% @posts.each do |p| %>
  <p>
     <%= link_to(p.title, p.post_url, :target => '_new') %>

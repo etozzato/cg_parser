@@ -77,6 +77,11 @@ blockquote {
   padding-left:25px;
 }
 
-#footer {background:#fff; width:840px; margin:0px auto; font-size:8pt;padding:6px;}
+#search {width:580px;margin:0px auto;margin-bottom:20px;}
+#footer {background:#fff; width:840px; margin:0px auto; font-size:8pt;padding:6px;margin-bottom:20px;}
 
 .last_update {float:right; font-style:italic; font-size:small; font-weight:bold;}
+
+input {font-size:20px;color:#666;background:#ddd;border:0px;padding:5px;}
+input[type=text] {width:450px;text-align:center;}
+input[type=submit] {width:100px;}

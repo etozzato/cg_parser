@@ -1,0 +1,7 @@
+<div id='search'>
+  <% form_tag('/', :method => :get) do %>
+   <%= text_field_tag(:q, params[:q]) %>
+   <%= submit_tag('SEARCH', :name => '') %>
+   <%= link_to('reset search', root_path) unless params[:q].blank? %>
+  <% end -%>
+</div>
