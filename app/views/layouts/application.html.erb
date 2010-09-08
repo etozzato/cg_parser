@@ -18,11 +18,30 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
+    <style>body {background-color:rgb(<%= rand(150) + 100 %>, <%= rand(150) + 100 %>, <%= rand(150) + 100 %>);}</style>
   </head> 
   <body>
-    <%= yield %>
+    <div id="box" class="box">
+      
+      <div id="container" class="container">
+        <div class="inner_box">
+  
+          <div class='column'>
+            <div class='page_title'>
+              <%= Settings::CONFIG[@app_name.to_sym][:title] %>
+              <%= "[#{@posts.total_entries}]" if @posts && @posts.respond_to?(:total_entries) %>
+            </div>
+            
+            <%= yield %>
+            
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+      </div>
+            
     <div id='footer'>
       <%= render :partial => 'shared/footer' %>
     </div>
+    
   </body>
 </html>

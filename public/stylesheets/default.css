@@ -1,1 +1,82 @@
-#footer {margin:50px;}
+body {
+  margin:0px;
+  margin-top:20px;
+  text-align:center;
+  font-family: "Book Antiqua", "Bookman Old Style", Georgia, "Times New Roman", Times, serif;
+  font-size:14px;
+}
+
+
+image {
+  border:0px;
+}
+
+
+.box {
+  margin-top:20px;
+}
+
+.container {
+  margin: 0 auto;
+  background:#FFF;
+  text-align:left;
+  border:1px solid #fff;
+  padding:5px;
+  width:840px;
+  margin-bottom:20px;
+}
+
+
+.inner_box {
+  background: #fff;
+  min-height:500px;
+  padding:5px;
+  text-align:justify;
+  color: #333 !important;
+  font-size:105%;
+}
+
+
+a {
+  color:#333;
+  text-decoration:underline;
+}
+
+
+a:hover {
+  color:orange;
+}
+
+
+.page_title {
+  color:#123456;
+  padding:1px;
+  padding-right:3px;
+  border-bottom:1px solid #333;
+  text-align:right;
+  font-size:150%;
+  margin-bottom:10px;
+  background:url('http://www.mekdigital.com/img/m.gif') left no-repeat;
+}
+
+
+.box, input {
+  font-size:80%
+  color:#333;
+}
+
+blockquote {
+  background:#fff;
+  border:1px solid #333;
+  padding:15px;
+}
+
+.column {
+  padding-top:10px;
+  padding-right:25px;
+  padding-left:25px;
+}
+
+#footer {background:#fff; width:840px; margin:0px auto; font-size:8pt;padding:6px;}
+
+.last_update {float:right; font-style:italic; font-size:small; font-weight:bold;}
