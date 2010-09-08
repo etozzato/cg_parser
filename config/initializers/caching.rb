@@ -1,4 +1,3 @@
-#unless defined?(RAKE_CMD)
 require 'rack/cache'
 if Rails.env != 'development'
   host = 'localhost'
@@ -10,4 +9,3 @@ if Rails.env != 'development'
     :allow_reload     => false,
     :allow_revalidate => false
 end
-#end
