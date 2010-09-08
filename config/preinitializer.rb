@@ -1,2 +1,1 @@
-#require "rubygems"
-#require "isolate/now.rb"
+require 'rubygems'
