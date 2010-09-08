@@ -5,6 +5,7 @@ task :gem_path do
   puts 'this is gem_path: ' + ENV['GEM_PATH']
   puts `ruby -v`
   puts `which ruby`
+  puts `echo $PATH`
 end
 
 desc 'register_feeds'
