@@ -31,9 +31,7 @@
               <%= Settings::CONFIG[@app_name.to_sym][:title] %>
               <%= "[#{@posts.total_entries}]" if @posts && @posts.respond_to?(:total_entries) %>
             </div>
-            
             <%= yield %>
-            
             <div style="clear:both;"></div>
           </div>
         </div>

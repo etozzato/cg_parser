@@ -1,9 +1,8 @@
 body {
   margin:0px;
-  margin-top:20px;
   text-align:center;
   font-family: "Book Antiqua", "Bookman Old Style", Georgia, "Times New Roman", Times, serif;
-  font-size:14px;
+  font-size:16px;
 }
 
 
@@ -11,19 +10,13 @@ image {
   border:0px;
 }
 
-
-.box {
-  margin-top:20px;
-}
-
 .container {
-  margin: 0 auto;
   background:#FFF;
-  text-align:left;
   border:1px solid #fff;
   padding:5px;
-  width:840px;
-  margin-bottom:20px;
+  width:880px;
+  margin-top:40px;
+  margin-left:100px;
 }
 
 
@@ -77,11 +70,12 @@ blockquote {
   padding-left:25px;
 }
 
-#search {width:580px;margin:0px auto;margin-bottom:20px;margin-top:20px;}
-#footer {background:#fff; width:840px; margin:0px auto; font-size:8pt;padding:6px;margin-bottom:20px;}
+#search {width:700px;margin:0px auto;margin-bottom:25px;margin-top:10px;}
+
+#footer {background:#fff; width:880px; margin-left:100px; font-size:10pt;padding:6px;margin-bottom:40px;margin-top:40px;}
 
 .last_update {float:right; font-style:italic; font-size:small; font-weight:bold;}
 
 input {font-size:20px;color:#666;background:#ddd;border:0px;padding:5px;}
-input[type=text] {width:450px;text-align:center;}
+input[type=text] {width:585px;text-align:center;}
 input[type=submit] {width:100px;}

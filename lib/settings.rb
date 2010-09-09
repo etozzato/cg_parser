@@ -9,7 +9,7 @@
 # end
 module Settings
   
-  APPLICATIONS = %w(my-audi my-bmw my-ferrari my-ford my-jeep my-landrover my-toyota my-volvo myacura mycadillac mychevrolet mychrysler mydodge mygmc myhonda myhummer myjaguar mylexus mylotus mymaserati mymazda mymercedes-benz mymini mymitsubishi mynissan myporsche myrover mysaab mysmart mysubaru myvolkswagen)
+  APPLICATIONS = %w(alfa-romeo my-audi my-bmw my-ferrari my-fiat my-ford my-jeep my-landrover my-toyota my-volvo myacura mycadillac mychevrolet mychrysler mydodge mygmc myhonda myhummer myjaguar mylexus mylotus mymaserati mymazda mymercedes-benz mymini mymitsubishi mynissan myporsche myrover mysaab mysmart mysubaru myvolkswagen)
   
   CAT = 'cta'
   
@@ -133,6 +133,9 @@ module Settings
   }
   
   CONFIG = {
+    :alfaromeo => {
+      :title=> 'Alfa-Romeo',
+      :reg_exp =>'(^| )alfa.?romeo($| )'},
     :myaudi => {
       :title=> 'Audi',
       :reg_exp =>'(^| )audi($| )'},
@@ -142,6 +145,9 @@ module Settings
     :myferrari => {
       :title=> 'Ferrari',
       :reg_exp =>'(^| )ferrari($| )'},
+    :myfiat => {
+      :title=> 'Fiat',
+      :reg_exp =>'(^| )fiat($| )'},
     :myford => {
       :title=> 'Ford',
       :reg_exp =>'(^| )ford($| )'},

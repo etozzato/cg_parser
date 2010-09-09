@@ -1,3 +1,6 @@
 <% Settings::APPLICATIONS.each do |web| %>
   <%= Rails.env.production? ? link_to(web, 'http://' + web + '.us') : link_to(web, 'http://stage.' + web + '.us:3000') %>
 <% end -%>
+  &nbsp;&nbsp;|&nbsp;&nbsp;created by <%= link_to('my-my', 'http://my-my.us') %>
+  &nbsp;&nbsp;|&nbsp;&nbsp;get in <%= link_to('touch', 'mailto:info@my-my.us') %>
+  &nbsp;&nbsp;&nbsp;&nbsp;
