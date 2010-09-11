@@ -28,7 +28,7 @@
   
           <div class='column'>
             <div class='page_title'>
-              <%= Settings::CONFIG[@app_name.to_sym][:title] %>
+              <%= Settings::MAKERS[@app_name.to_sym][:title] %>
               <%= "[#{@posts.total_entries}]" if @posts && @posts.respond_to?(:total_entries) %>
             </div>
             <%= yield %>
