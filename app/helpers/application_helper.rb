@@ -5,8 +5,4 @@ module ApplicationHelper
     date.respond_to?(:strftime) ? date.strftime("%b #{date.day.ordinalize}") : ''
   end
   
-  def page_title
-    "MyStream&trade; - #{CONFIG[:make]||CONFIG[:reg_exp].titleize} for sale in the USA"
-  end
-  
 end
