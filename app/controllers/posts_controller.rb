@@ -2,12 +2,20 @@ class PostsController < ApplicationController
 
   def index
     expires_in 10.minutes, :public => true, :private => false
+
+    conditions = ["maker = ?", @app_name]
+    
+    unless params[:q].blank?
+      conditions[0] += " AND LOWER(title) LIKE ?"
+      conditions << "%#{params[:q].downcase}%"
+    end
+    
     options = {
         :page => params[:page]||1, 
         :per_page => 100, 
-        :order => 'published DESC'
+        :order => 'published DESC',
+        :conditions => conditions
     }
-    options.merge!({:conditions => ["title like ?", "%#{params[:q]}%"]}) unless params[:q].blank?
     @posts = Post.paginate(options)
   end
 

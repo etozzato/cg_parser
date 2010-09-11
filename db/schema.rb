@@ -9,7 +9,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100420070934) do
+ActiveRecord::Schema.define(:version => 20100911082234) do
+
+  create_table "alfaromeo_feeds", :force => true do |t|
+    t.string   "url"
+    t.string   "name"
+    t.datetime "last_modified"
+  end
+
+  add_index "alfaromeo_feeds", ["name"], :name => "index_alfaromeo_feeds_on_name"
+
+  create_table "alfaromeo_posts", :force => true do |t|
+    t.string   "feed_name"
+    t.string   "title"
+    t.string   "url"
+    t.integer  "price"
+    t.datetime "published"
+  end
+
+  add_index "alfaromeo_posts", ["feed_name"], :name => "index_alfaromeo_posts_on_feed_name"
+  add_index "alfaromeo_posts", ["title"], :name => "index_alfaromeo_posts_on_title"
+
+  create_table "feeds", :force => true do |t|
+    t.string   "state"
+    t.string   "url"
+    t.string   "name"
+    t.datetime "last_modified"
+  end
+
+  add_index "feeds", ["name"], :name => "index_feeds_on_name"
+  add_index "feeds", ["url"], :name => "index_feeds_on_url"
 
   create_table "myacura_feeds", :force => true do |t|
     t.string   "url"
@@ -162,6 +191,25 @@ ActiveRecord::Schema.define(:version => 20100420070934) do
 
   add_index "myferrari_posts", ["feed_name"], :name => "index_myferrari_posts_on_feed_name"
   add_index "myferrari_posts", ["title"], :name => "index_myferrari_posts_on_title"
+
+  create_table "myfiat_feeds", :force => true do |t|
+    t.string   "url"
+    t.string   "name"
+    t.datetime "last_modified"
+  end
+
+  add_index "myfiat_feeds", ["name"], :name => "index_myfiat_feeds_on_name"
+
+  create_table "myfiat_posts", :force => true do |t|
+    t.string   "feed_name"
+    t.string   "title"
+    t.string   "url"
+    t.integer  "price"
+    t.datetime "published"
+  end
+
+  add_index "myfiat_posts", ["feed_name"], :name => "index_myfiat_posts_on_feed_name"
+  add_index "myfiat_posts", ["title"], :name => "index_myfiat_posts_on_title"
 
   create_table "myford_feeds", :force => true do |t|
     t.string   "url"
@@ -599,5 +647,18 @@ ActiveRecord::Schema.define(:version => 20100420070934) do
 
   add_index "myvolvo_posts", ["feed_name"], :name => "index_myvolvo_posts_on_feed_name"
   add_index "myvolvo_posts", ["title"], :name => "index_myvolvo_posts_on_title"
+
+  create_table "posts", :force => true do |t|
+    t.string   "feed_name"
+    t.string   "maker"
+    t.string   "title"
+    t.string   "url"
+    t.integer  "price"
+    t.datetime "published"
+  end
+
+  add_index "posts", ["feed_name"], :name => "index_posts_on_feed_name"
+  add_index "posts", ["maker"], :name => "index_posts_on_maker"
+  add_index "posts", ["title"], :name => "index_posts_on_title"
 
 end

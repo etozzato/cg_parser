@@ -1,10 +1,11 @@
 class Feed < ActiveRecord::Base
-  validates_uniqueness_of :name
+  validates_uniqueness_of :url
   has_many :posts, :order => 'published DESC', :foreign_key => 'feed_name', :primary_key => 'name'
   
-  def add_entry(entry)
+  def add_entry(entry, maker)
     Post.create!(
       :feed_name => self.name,
+      :maker => maker,
       :title => entry.title.sanitize.gsub(/\$([0-9]+)/,''),
       :url => Post.short_post_url(entry),
       :published => entry.published,
