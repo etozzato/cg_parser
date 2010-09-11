@@ -4,7 +4,7 @@ class Feed < ActiveRecord::Base
   
   def add_entry(entry, maker)
     Post.create!(
-      :feed_name => self.name,
+      :feed_name => self.url,
       :maker => maker,
       :title => entry.title.sanitize.gsub(/\$([0-9]+)/,''),
       :url => Post.short_post_url(entry),

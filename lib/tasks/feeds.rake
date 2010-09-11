@@ -26,19 +26,19 @@ desc 'parse_rss'
 task :parse_rss do
   require 'feedzirra'
   
-  feed_list = Feed.find(:all, :limit => 83, 
+  feed_list = Feed.find(:all, :limit => 42, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
 
   feed_urls = feed_list.collect {|el| "http://#{el.url}.craigslist.org/cta/index.rss"}
   
-  puts feed_urls
+  #puts feed_urls
   
   parsed_feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
   reg_exps =  Settings::MAKERS.values.collect{|el| Regexp.new(el[:reg_exp], true)}
   update_log  = File.join(RAILS_ROOT, 'log', 'update.log')
   
-  feed_list.each do |feed| # 83
+  feed_list.each do |feed| # 42 T=6min
     new_posts = 0
     feed_handler = parsed_feeds["http://#{feed.url}.craigslist.org/cta/index.rss"]
     
@@ -62,18 +62,18 @@ task :parse_rss do
         end
         
         if last_post.nil? || last_post.published < published
-          puts "current title: #{title=entry.title}"
+          #puts "current title: #{title=entry.title}"
           Settings::MAKERS.keys.each_with_index do |maker, idx|
             next unless entry
-            puts "trying #{reg_exps[idx]} #{idx}" 
+            #puts "trying #{reg_exps[idx]} #{idx}" 
             if entry.title =~ reg_exps[idx]
-              puts "title match! skipping regexp"
-              feed.add_entry(entry, maker)
+              #puts "title match! skipping regexp"
+              feed.add_entry(entry, maker.to_s)
               entry = nil
               new_posts += 1
             end
           end
-          puts "done with title: #{title}"
+          #puts "done with title: #{title}"
           #feed.add_entry(entry, 'unknown') if entry
         end
       end
