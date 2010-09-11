@@ -26,7 +26,7 @@ desc 'parse_rss'
 task :parse_rss do
   require 'feedzirra'
   
-  feed_list = Feed.find(:all, :limit => 50, 
+  feed_list = Feed.find(:all, :limit => 83, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
 
@@ -74,7 +74,7 @@ task :parse_rss do
             end
           end
           puts "done with title: #{title}"
-          feed.add_entry(entry, 'unknown') if entry
+          #feed.add_entry(entry, 'unknown') if entry
         end
       end
     end
