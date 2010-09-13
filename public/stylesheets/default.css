@@ -79,3 +79,34 @@ blockquote {
 input {font-size:20px;color:#666;background:#ddd;border:0px;padding:5px;}
 input[type=text] {width:585px;text-align:center;}
 input[type=submit] {width:100px;}
+
+div.slider {
+  background:#ebebeb;
+  margin-top:10px;
+  width:495px; 
+  height:18px; 
+  position: relative;
+  border-bottom:0px solid #333;
+}
+
+div.handler_min, div.handler_start, div.handler_max {
+  width:10px;
+  height:17px; 
+  background:#333;
+  cursor:move; 
+  position:absolute;
+  z-index:15;
+  border:1px solid #333;
+}
+
+div.handler_min:hover, div.handler_start:hover, div.handler_max:hover {
+/*border:1px solid red;*/
+  background:green;
+}
+
+div.slider_label{
+  width:280px;
+  text-align:center;
+  position: relative;
+  left:500px;
+}
