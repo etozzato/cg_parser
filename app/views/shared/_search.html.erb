@@ -18,4 +18,4 @@
    <br/> &nbsp;<%= link_to('reset search', root_path) if !params[:q].blank? || (@price_filter[:min] != @price_filter[:abs_min]) || (@price_filter[:max] != @price_filter[:abs_max]) %>
   <% end -%>
 </div>
-<%= javascript_tag("init_sliders(#{@price_filter.values.join(', ')})") %>
+<%= javascript_tag("init_sliders(#{@price_filter[:abs_min]},#{@price_filter[:abs_max]}, #{@price_filter[:min]}, #{@price_filter[:max]})") %>
