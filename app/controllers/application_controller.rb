@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   private
   def set_app_name
     @app_name ||= request.env['SERVER_NAME'].gsub(/^www\./,'').gsub(/^stage\./,'').gsub(/\.us$/,'').clean
+    @app_url  ||= request.env['SERVER_NAME'].gsub(/^www\./,'')
     @price_filter ||= {}
     @price_range ||= Post.first(:select => 'MAX(price) AS max, MIN(price) AS min', :conditions => ["maker = ?", @app_name])
     @price_filter[:abs_min], @price_filter[:abs_max] = @price_range.min, @price_range.max
