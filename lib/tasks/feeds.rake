@@ -31,7 +31,7 @@ task :parse_rss do
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
 
   feed_urls = feed_list.collect {|el| "http://#{el.url}.craigslist.org/cta/index.rss"}
-  
+   
   #puts feed_urls
   
   parsed_feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
@@ -39,10 +39,15 @@ task :parse_rss do
   update_log  = File.join(RAILS_ROOT, 'log', 'update.log')
   
   feed_list.each do |feed| # 42 T=6min
+    puts "http://#{feed.url}.craigslist.org/cta/index.rss"
     new_posts = 0
     feed_handler = parsed_feeds["http://#{feed.url}.craigslist.org/cta/index.rss"]
-    
-    if feed_handler.last_modified.is_a?(String)
+    if feed_handler.is_a?(Fixnum)
+     `echo '[#{Time.now}] Deleting #{feed.name}' >> #{update_log}`
+     feed.destroy
+     next
+    end
+   if feed_handler.last_modified.is_a?(String)
       feed_handler.last_modified =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+)\W{1}(\d+)/
       last_modified = Time.utc($1,$2,$3,$4,$5,$6)
     else
