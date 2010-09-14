@@ -4,7 +4,7 @@ class Feed < ActiveRecord::Base
   
   def add_entry(entry, maker)
     price = entry.title =~ /\$([0-9]+)/ ? $1 : 0
-    title = entry.title.sanitize.gsub(/\$([0-9]+)/,'').gsub(/\W/,'').strip
+    title = entry.title.sanitize.gsub(/\$([0-9]+)/,'').gsub(/\W/,' ').strip
     Post.create(
       :feed_name => self.url,
       :maker => maker,
