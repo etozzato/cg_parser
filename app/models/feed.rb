@@ -3,11 +3,12 @@ class Feed < ActiveRecord::Base
   validates_uniqueness_of :url
   
   def add_entry(entry, maker)
-    price = (entry.title =~ /\$([0-9]+)/ ? $1 : 0)
+    price = entry.title =~ /\$([0-9]+)/ ? $1 : 0
+    title = entry.title.sanitize.gsub(/\$([0-9]+)/,'').gsub(/\W/,'').strip
     Post.create(
       :feed_name => self.url,
       :maker => maker,
-      :title => entry.title.sanitize.gsub(/\$([0-9]+)/,''),
+      :title => title,
       :url => Post.short_post_url(entry),
       :published => entry.published,
       :price => price) if price.to_i > 0
