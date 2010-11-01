@@ -4,7 +4,7 @@ class Feed < ActiveRecord::Base
   
   def add_entry(entry, maker)
     price = entry.title =~ /\$([0-9]+)/ ? $1 : 0
-    title = entry.title.sanitize.gsub(/\$([0-9]+)/,'').gsub(/\W/,' ').strip
+    title = entry.title.sanitize.gsub(/\$([0-9]+)/,'').gsub(/[^a-zA-Z0-9,.?!-() ]/,' ').gsub(/ +/, ' ').strip
     Post.create(
       :feed_name => self.url,
       :maker => maker,
@@ -14,9 +14,9 @@ class Feed < ActiveRecord::Base
       :price => price) if price.to_i > 0
   end
   
-  def self.add(name)
-    unless exists? :name => name
-      create!(:name => name, :url => url_for(Settings::CAT, name))
+  def self.add(params)
+    unless exists? :name => params[:name]
+      create!(:state => params[:state], :url => params[:url], :name => params[:name])
     end
   end
 

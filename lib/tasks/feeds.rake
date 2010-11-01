@@ -10,6 +10,23 @@ task :gem_path do
   puts `gem list`
 end
 
+task :register_feeds_to_db do
+  file = open("#{RAILS_ROOT}/lib/cities.rb").readlines
+  file.each do |line|
+    state, url, city = line.split(',')
+    Feed.add({:state => state, :name => city, :url => url})
+  end
+end
+
+task :register_feeds_to_oml do
+  file = open("#{RAILS_ROOT}/lib/cities.rb").readlines
+  file.each do |line|
+    state, url, city = line.split(',')
+    text = "<outline\n\ttext=\"#{city.strip}\"\n\ttitle=\"#{city.strip}\"\n\ttype=\"rss\"\n\txmlUrl=\"http://#{url.strip}.craigslist.org/cto/index.rss\" htmlUrl=\"http://#{url.strip}.craigslist.org/cto/\"/>"
+    puts text
+  end
+end
+
 # desc 'register_feeds'
 # task :register_feeds do
 #   Settings::APPLICATIONS.each do |app|
@@ -22,33 +39,54 @@ end
 #   end
 # end
 
+task :parse_atom do
+  require 'feedzirra'
+  parsed_feed = Feedzirra::Feed.fetch_and_parse(Settings::ATOM_URL)
+  reg_exps =  Settings::MAKERS.values.collect{|el| Regexp.new(el[:reg_exp], true)}
+
+  last_post = Post.first(:select => 'published', :order => 'published DESC')
+  parsed_feed.entries.each do |entry|
+    if entry.published.is_a?(String)
+      entry.published =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+).*/
+      published = Time.utc($1,$2,$3,$4,$5,$6)
+    else
+      published = entry.published
+    end
+      
+    if last_post.nil? || last_post.published < published
+      Settings::MAKERS.keys.each_with_index do |maker, idx|
+        next unless entry
+        if entry.title =~ reg_exps[idx]
+          Post.add_entry(entry, maker.to_s)
+          entry = nil
+        end
+      end
+    end
+  end
+end
+
 desc 'parse_rss'
 task :parse_rss do
   require 'feedzirra'
-  
   feed_list = Feed.find(:all, :limit => 42, 
                         :order => 'last_modified ASC, name ASC', 
                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
-
-  feed_urls = feed_list.collect {|el| "http://#{el.url}.craigslist.org/cta/index.rss"}
-   
-  #puts feed_urls
-  
+  feed_urls = feed_list.collect {|el| "http://#{el.url}.craigslist.org/cto/index.rss"}
   parsed_feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
   reg_exps =  Settings::MAKERS.values.collect{|el| Regexp.new(el[:reg_exp], true)}
   update_log  = File.join(RAILS_ROOT, 'log', 'update.log')
   
   feed_list.each do |feed| # 42 T=6min
-    puts "http://#{feed.url}.craigslist.org/cta/index.rss"
+    #puts Settings::ATOM_URL + feed.url
     new_posts = 0
-    feed_handler = parsed_feeds["http://#{feed.url}.craigslist.org/cta/index.rss"]
+    feed_handler = parsed_feeds[Settings::ATOM_URL + feed.url]
     if feed_handler.is_a?(Fixnum)
      `echo '[#{Time.now}] Deleting #{feed.name}' >> #{update_log}`
      feed.destroy
      next
     end
    if feed_handler.last_modified.is_a?(String)
-      feed_handler.last_modified =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+)\W{1}(\d+)/
+      feed_handler.last_modified =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+).*/
       last_modified = Time.utc($1,$2,$3,$4,$5,$6)
     else
       last_modified = feed_handler.last_modified
@@ -60,7 +98,7 @@ task :parse_rss do
       feed_handler.entries.each do |entry|
         
         if entry.published.is_a?(String)
-          entry.published =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+)\W{1}(\d+)/
+          entry.published =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+).*/
           published = Time.utc($1,$2,$3,$4,$5,$6)
         else
           published = entry.published
@@ -86,69 +124,3 @@ task :parse_rss do
     `echo '[#{Time.now}] #{new_posts} new posts for #{feed.name}' >> #{update_log}`
   end
 end
-
-
-# desc 'update_feeds'
-# task :update_feeds do
-#   require 'feedzirra'
-# 
-#   update_id   = File.join(RAILS_ROOT, 'log', 'update.id')
-#   update_log  = File.join(RAILS_ROOT, 'log', 'update.log')
-#   
-#   if File.exist?(update_id)
-#     feed_id = File.read(update_id).to_i
-#     `echo '#{feed_id+1}' > #{update_id}`
-#     if feed_id > Settings::APPLICATIONS.size-1
-#       feed_id = 0
-#       `echo '#{feed_id+1}' > #{update_id}`
-#     end else
-#     feed_id = 0
-#     `echo '#{feed_id+1}' > #{update_id}` 
-#   end
-# 
-#   app = Settings::APPLICATIONS[feed_id]
-#   Feed.set_table_name(app.gsub(/\W/,'') + '_feeds'.to_sym)
-#   Post.set_table_name(app.gsub(/\W/,'') + '_posts'.to_sym)
-# 
-#   feed_list = Feed.find(:all, :limit => 60, 
-#                         :order => 'last_modified ASC, name ASC', 
-#                         :conditions => ["(last_modified < ? OR last_modified IS NULL)", 15.minutes.ago])
-#   feed_urls = feed_list.collect {|el| el.url }
-#   parsed_feeds = Feedzirra::Feed.fetch_and_parse(feed_urls)
-#   
-#   reg_exp =  Regexp.new(Settings::CONFIG[app.gsub(/\W/,'').to_sym][:reg_exp], true)
-#   new_posts = 0
-#   feed_list.each do |feed|
-#     feed_handler = parsed_feeds[feed.url]
-#     
-#     if feed_handler.last_modified.is_a?(String)
-#       feed_handler.last_modified =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+)\W{1}(\d+)/
-#       last_modified = Time.utc($1,$2,$3,$4,$5,$6)
-#     else
-#       last_modified = feed_handler.last_modified
-#     end
-# 
-#     if feed.last_modified.nil? || feed.last_modified < last_modified
-#       Feed.update(feed.id, :last_modified => last_modified)
-#       last_post = feed.posts.first
-#       feed_handler.entries.each do |entry|
-#         
-#         if entry.published.is_a?(String)
-#           entry.published =~ /(\d{4})-(\d{2})-(\d{2})T(\d+):(\d+):(\d+)\W{1}(\d+)/
-#           published = Time.utc($1,$2,$3,$4,$5,$6)
-#         else
-#           published = entry.published
-#         end
-#         
-#         if last_post.nil? || last_post.published < published
-#           if entry.title =~ reg_exp
-#             puts entry.title
-#             feed.add_entry(entry)
-#             new_posts += 1
-#           end
-#         end
-#       end
-#     end
-#   end
-#   `echo '#{new_posts} new posts for #{app}' >> #{update_log}`
-# end
