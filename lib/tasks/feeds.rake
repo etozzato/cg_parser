@@ -14,7 +14,7 @@ task :register_feeds_to_db do
   file = open("#{RAILS_ROOT}/lib/cities.rb").readlines
   file.each do |line|
     state, url, city = line.split(',')
-    Feed.add({:state => state, :name => city, :url => url})
+    Feed.add({:state => state.strip, :name => city.strip, :url => url.strip})
   end
 end
 
@@ -77,10 +77,10 @@ task :parse_rss do
   update_log  = File.join(RAILS_ROOT, 'log', 'update.log')
   
   feed_list.each do |feed| # 42 T=6min
-    #puts Settings::ATOM_URL + feed.url
+    puts "http://#{feed.url}.craigslist.org/cto/index.rss"
     new_posts = 0
-    feed_handler = parsed_feeds[Settings::ATOM_URL + feed.url]
-    if feed_handler.is_a?(Fixnum)
+    feed_handler = parsed_feeds["http://#{feed.url}.craigslist.org/cto/index.rss"]
+    if feed_handler.nil? || feed_handler.is_a?(Fixnum)
      `echo '[#{Time.now}] Deleting #{feed.name}' >> #{update_log}`
      feed.destroy
      next
