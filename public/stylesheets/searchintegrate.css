@@ -1,0 +1,55 @@
+#search_integrate {width:90%; margin:0px auto;}
+
+#siwp_content{
+  margin-bottom:5px;
+}
+
+#siwp_header{
+  color:#333;
+  font-weight:bold;
+  padding: 0 0 15px 0;
+  border-bottom: 1px dotted #333;
+  height:20px;
+}
+
+#siwp_header #siwp_results{
+  float:left;  
+}
+
+#siwp_header #siwp_powered{
+  float:right;
+}
+
+.siwp_result{
+  padding:10px 0;
+  clear: both;
+  border-bottom: 1px dotted #333;
+  font-size:small;
+}
+
+a.siwp_title{
+  font-size: medium;
+  text-decoration: none;
+}
+
+a.siwp_title:hover{
+  text-decoration: underline;
+
+}
+
+a.siwp_description{
+  font-size:small;
+  color:#222;
+  text-decoration:none;
+}
+
+a.siwp_url{
+  font-size:small;
+  text-decoration:none;
+}
+
+
+#siwp-config{
+  border: 1px dotted #000;
+  background: #ffffeb;  
+}
