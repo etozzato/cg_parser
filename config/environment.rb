@@ -12,8 +12,8 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
   config.middleware.use Rack::Cache,
   :verbose     => true,
-  :metastore   => "memcached://localhost:11211/meta",
-  :entitystore => "memcached://localhost:11211/body",
+  :metastore   => "memcached://127.0.0.1:11211/meta",
+  :entitystore => "memcached://127.0.0.1:11211/body",
   :allow_reload     => false,
   :allow_revalidate => false
 end
