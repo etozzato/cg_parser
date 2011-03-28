@@ -5,17 +5,17 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot.rb')
 
-require 'dalli'
-require 'rack/cache'
+# require 'dalli'
+# require 'rack/cache'
 
 Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
-  config.middleware.use Rack::Cache,
-  :verbose     => true,
-  :metastore   => "memcached://127.0.0.1:11211/meta",
-  :entitystore => "memcached://127.0.0.1:11211/body",
-  :allow_reload     => false,
-  :allow_revalidate => false
+  # config.middleware.use Rack::Cache,
+  # :verbose     => true,
+  # :metastore   => "memcached://127.0.0.1:11211/meta",
+  # :entitystore => "memcached://127.0.0.1:11211/body",
+  # :allow_reload     => false,
+  # :allow_revalidate => false
 end
 
 require 'will_paginate'
