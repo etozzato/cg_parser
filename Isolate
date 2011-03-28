@@ -1,8 +1,0 @@
-gem 'rails', '2.3.5'
-gem 'will_paginate'
-gem 'pauldix-sax-machine'
-gem 'curb'
-gem 'pauldix-feedzirra'
-gem 'haml'
-gem 'rack-cache'
-gem 'rack'
