@@ -16,7 +16,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.short_post_url(entry)
-    entry.url.gsub(/\.html/,'').gsub(/http:\/\/.+\.craigslist\.org\//,'')
+    entry.gsub(/\.html/,'').gsub(/http:\/\/.+\.craigslist\.org\//,'')
   end
   
   def self.market_from(entry)

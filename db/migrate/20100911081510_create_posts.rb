@@ -1,4 +1,4 @@
-class CreateGenaralPosts < ActiveRecord::Migration
+class CreatePosts < ActiveRecord::Migration
   def self.up
     create_table :posts do |t|
       t.string :feed_name, :maker, :title, :url
