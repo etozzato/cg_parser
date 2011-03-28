@@ -9,10 +9,13 @@
 
   <% @posts.each do |p| %>
    <p>
+      <%= p.year %>
       <%= link_to(p.title, p.post_url, :target => '_new') %>
       <%= number_to_currency(p.price, :precision => 0) %>
       <%= h_date(p.published) %>
-      in <strong><%= p.feed_name.titleize %></strong>
+      in <strong><%= Feed.feeds[p.feed_name].name.titleize %></strong>
+      (<strong><%= Feed.feeds[p.feed_name].state.titleize %></strong>)
+    </p>
   <% end -%>
 
   <%= will_paginate(@posts) %>

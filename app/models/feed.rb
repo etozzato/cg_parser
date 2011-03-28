@@ -2,6 +2,10 @@ class Feed < ActiveRecord::Base
   has_many :posts, :order => 'published DESC', :foreign_key => 'feed_name', :primary_key => 'name'
   validates_uniqueness_of :url
   
+  def self.feeds
+    @feeds ||= hash_all('url')
+  end
+  
   def add_entry(entry, maker)
     price = entry.title =~ /\$([0-9]+)/ ? $1 : 0
     title = entry.title.sanitize.gsub(/\$([0-9]+)/,'').gsub(/[^a-zA-Z0-9,.?!-() ]/,' ').gsub(/ +/, ' ').strip

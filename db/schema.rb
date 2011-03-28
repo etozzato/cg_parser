@@ -27,11 +27,14 @@ ActiveRecord::Schema.define(:version => 20100911081510) do
     t.string   "title"
     t.string   "url"
     t.integer  "price"
+    t.integer  "year"
     t.datetime "published"
   end
 
   add_index "posts", ["feed_name"], :name => "index_posts_on_feed_name"
   add_index "posts", ["maker"], :name => "index_posts_on_maker"
+  add_index "posts", ["price"], :name => "index_posts_on_price"
   add_index "posts", ["title"], :name => "index_posts_on_title"
+  add_index "posts", ["year"], :name => "index_posts_on_year"
 
 end

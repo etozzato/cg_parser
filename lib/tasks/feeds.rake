@@ -184,6 +184,7 @@ task :parse_google do
             Post.create(:feed_name  => entry[:feed],
                         :maker      => maker.to_s,
                         :title      => entry[:title],
+                        :year       => entry[:year],
                         :url        => entry[:href],
                         :published  => entry[:published],
                         :price      => entry[:price])
