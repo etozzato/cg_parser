@@ -7,6 +7,12 @@ require File.join(File.dirname(__FILE__), 'boot.rb')
 
 Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
+  config.middleware.use Rack::Cache,
+  :verbose     => true,
+  :metastore   => "memcached://localhost:11211/",
+  :entitystore => "memcached://localhost:11211/",
+  :allow_reload     => false,
+  :allow_revalidate => false
 end
 
 require 'will_paginate'
