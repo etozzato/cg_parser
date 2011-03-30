@@ -1,0 +1,30 @@
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['geomap']});
+
+    function drawVisualization() {
+      var data = new google.visualization.DataTable();
+      data.addRows(<%= @stats.size %>);
+      data.addColumn('string', 'Country');
+      data.addColumn('number', 'Posts');
+      <% c = 0 %>
+      <% @stats.each do |state, count| %>
+        <%= "data.setValue(#{c}, 0, '#{state.titleize}');" %>
+        <%= "data.setValue(#{c}, 1, #{count});" %>
+        <% c += 1 %>
+      <% end %>
+
+     var options = {};
+     options['region'] = 'US';
+     options['showLegend'] = false;
+
+      var geomap = new google.visualization.GeoMap(
+          document.getElementById('visualization'));
+      geomap.draw(data, options);
+    }
+
+    google.setOnLoadCallback(drawVisualization);
+  </script>
+</head>
+<body style="font-family: Arial;border: 0 none;">
+<div id="visualization" style="width: 800px; height: 400px;"></div>
