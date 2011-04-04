@@ -1,10 +1,10 @@
 <div id="search"> 
   <div class="search-label">What are you looking for?</div> 
-  <form id="mainsearch"> 
-    <input type="text" id="keyword" value="Convertible" onfocus="if (this.value == 'Convertible') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Convertible';}"/> 
+  <% form_tag('/', :method => :get, :id => 'mainsearch') do %>
+  <%= text_field_tag(:q, params[:q], :id => 'keyword') %>
     <div id="price-option"> 
       <div class="heading">Maximum price</div> 
-      <select name="price" id="maxprice"> 
+      <select name="price_max" id="max_price"> 
         <option selected="selected" value="1000">$1000</option> 
         <option value="2000">$2000</option> 
         <option value="3000">$3000</option> 
@@ -20,9 +20,10 @@
         <option value="50000">$50000</option> 
         <option value="75000">$75000</option> 
         <option value="100000">$100000</option> 
-        <option value="unlimited">Unlimited</option> 
+        <option value="">Unlimited</option> 
       </select> 
     </div> 
     <input type="submit" id="submit-button" value=""/> 
-  </form> 
-</div><!-- search --> 
+  <% end %> 
+</div><!-- search -->
+<%= javascript_tag("$('max_price').value = '#{params[:price_max]||15000}';") %>

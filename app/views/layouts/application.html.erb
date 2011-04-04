@@ -33,7 +33,24 @@
             <%= yield %>
           </div><!-- left --> 
 
-          <div id="rightcol"> 
+          <div id="rightcol">
+            
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2F<%= @app_url %>%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
+            
+            
+            <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-9814004731260896";
+            /* My-My Top Right Ad */
+            google_ad_slot = "8365127755";
+            google_ad_width = 300;
+            google_ad_height = 250;
+            //-->
+            </script>
+            <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+            <br /><br />
+            
             <%= yield(:right) %>
           </div><!-- rightcol --> 
             <div class="clear"></div> 

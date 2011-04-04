@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
     options = {
         :page => params[:page]||1, 
-        :per_page => 30, 
+        :per_page => 100, 
         :order => 'published DESC',
         :conditions => conditions
     }
