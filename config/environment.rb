@@ -19,3 +19,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'will_paginate'
+require 'hash_all'

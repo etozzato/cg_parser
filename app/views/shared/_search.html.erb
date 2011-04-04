@@ -1,21 +1,29 @@
-<div id='search'>
-  <% form_tag('/', :method => :get) do %>
-   <%= text_field_tag(:q, params[:q]) %>
-   <%= submit_tag('SEARCH') %>
-   <input type="hidden" id="price_min" name="price_min" value="<%= @price_filter[:min] %>">
-   <input type="hidden" id="price_max" name="price_max" value="<%= @price_filter[:max] %>">
-    <div class="slider_container">
-      <div id="rate_slider" class="slider" style="margin-bottom: 1px;">
-        <div style="left: 0px;" class="handler_min selected"></div>
-        <div style="left: 0px;" class="handler_max selected"></div>
-        <div id="slider_label" class="slider_label">
-          Price: 
-          <span id="rate_value_min" class="invisible" style="font-weight:bold;color:black"><%= @price_filter[:min] %></span> to
-          <span id="rate_value_max" class="invisible" style="font-weight:bold;color:black"><%= @price_filter[:max] %></span> USD
-        </div>
-      </div>
-    </div>
-   <br/> &nbsp;<%= link_to('reset search', root_path) if !params[:q].blank? || (@price_filter[:min] != @price_filter[:abs_min]) || (@price_filter[:max] != @price_filter[:abs_max]) %>
-  <% end -%>
-</div>
-<%= javascript_tag("init_sliders(#{@price_filter[:abs_min]},#{@price_filter[:abs_max]}, #{@price_filter[:min]}, #{@price_filter[:max]})") %>
+<div id="search"> 
+  <div class="search-label">What are you looking for?</div> 
+  <% form_tag('/', :method => :get, :id => 'mainsearch') do %>
+  <%= text_field_tag(:q, params[:q], :id => 'keyword') %>
+    <div id="price-option"> 
+      <div class="heading">Maximum price</div> 
+      <select name="price_max" id="max_price"> 
+        <option selected="selected" value="1000">$1000</option> 
+        <option value="2000">$2000</option> 
+        <option value="3000">$3000</option> 
+        <option value="4000">$4000</option> 
+        <option value="5000">$5000</option> 
+        <option value="7500">$7500</option> 
+        <option value="10000">$10000</option> 
+        <option value="15000">$15000</option> 
+        <option value="20000">$20000</option> 
+        <option value="25000">$25000</option> 
+        <option value="30000">$30000</option> 
+        <option value="40000">$40000</option> 
+        <option value="50000">$50000</option> 
+        <option value="75000">$75000</option> 
+        <option value="100000">$100000</option> 
+        <option value="">Unlimited</option> 
+      </select> 
+    </div> 
+    <input type="submit" id="submit-button" value=""/> 
+  <% end %> 
+</div><!-- search -->
+<%= javascript_tag("$('max_price').value = '#{params[:price_max]||15000}';") %>

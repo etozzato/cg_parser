@@ -1,47 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html> 
-  <head> 
-    <title>My-My&trade; - <%= Settings::MAKERS[@app_name.to_sym][:title] %> for sale in the USA</title> 
-    <meta name='description' value='Search for used and new cars: audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen in 115 aggregated craigslist feeds! Albany Allentown Albuquerque Anchorage Ann Arbor Asheville Atlanta Austin Bakersfield Baltimore Baton Rouge Birmingham Boise Boston Buffalo Burlington Champaign Urbana Charleston Charlotte Chicago Chico Cincinnati Cleveland Columbia, S.C. Columbus Dallas Delaware Dayton Denver / Boulder Des moines Detroit El Paso Eugene Fort Myers / SW Florida Fresno Grand Rapids Greensboro Harrisburg Hartford Houston Honolulu Humboldt Indianapolis Inland Empire Ithaca Jackson Jacksonville Kansas City Knoxville Little Rock Las Vegas Lexington Los Angeles Louisville Maine Madison Memphis Miami Milwaukee Minneapolis Mobile Modesto Montana Monterey Montgomery Nashville New Hampshire New Haven New Jersey New York City New Orleans Norfolk North Dakota Oklahoma City Omaha Orange County Orlando Pensacola Philadelphia Phoenix Pittsburgh Portland Puerto Rico Providence Raleigh Redding Reno Richmond Rochester Sacramento Salt Lake City San Antonio San Diego San Francisco Bay Area San Luis Obispo Santa Barbara Savannah Seattle-Tacoma Shreveport South Dakota Spokane St. Louis Stockton Syracuse Tallahassee Tampa Toledo Tucson Tulsa Washington D.C. Western Massachusetts West Palm Beach West Virginia Wichita Wyoming' /> 
-    <meta name='keywords' value='new and used cars, audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen' /> 
-    <%= javascript_include_tag :all, :cache => true %>
-    <%= stylesheet_link_tag :all, :cache => true %>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-18376540-3']);
-      _gaq.push(['_setDomainName', 'none']);
-      _gaq.push(['_setAllowLinker', true]);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
+<head> 
+  <title>My-My&trade; - <%= Settings::MAKERS[@app_name.to_sym][:title] %> for sale in the USA</title> 
+  <meta name='description' value='Search for used and new cars: audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen in 115 aggregated craigslist feeds! Albany Allentown Albuquerque Anchorage Ann Arbor Asheville Atlanta Austin Bakersfield Baltimore Baton Rouge Birmingham Boise Boston Buffalo Burlington Champaign Urbana Charleston Charlotte Chicago Chico Cincinnati Cleveland Columbia, S.C. Columbus Dallas Delaware Dayton Denver / Boulder Des moines Detroit El Paso Eugene Fort Myers / SW Florida Fresno Grand Rapids Greensboro Harrisburg Hartford Houston Honolulu Humboldt Indianapolis Inland Empire Ithaca Jackson Jacksonville Kansas City Knoxville Little Rock Las Vegas Lexington Los Angeles Louisville Maine Madison Memphis Miami Milwaukee Minneapolis Mobile Modesto Montana Monterey Montgomery Nashville New Hampshire New Haven New Jersey New York City New Orleans Norfolk North Dakota Oklahoma City Omaha Orange County Orlando Pensacola Philadelphia Phoenix Pittsburgh Portland Puerto Rico Providence Raleigh Redding Reno Richmond Rochester Sacramento Salt Lake City San Antonio San Diego San Francisco Bay Area San Luis Obispo Santa Barbara Savannah Seattle-Tacoma Shreveport South Dakota Spokane St. Louis Stockton Syracuse Tallahassee Tampa Toledo Tucson Tulsa Washington D.C. Western Massachusetts West Palm Beach West Virginia Wichita Wyoming' /> 
+  <meta name='keywords' value='new and used cars, audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen' /> 
+  <%= javascript_include_tag :all, :cache => true %>
+  <%= stylesheet_link_tag 'style', :cache => true %>
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-18376540-3']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
     </script>
-    <style>
-      body {background-color:rgb(<%= rand(150) + 100 %>, <%= rand(150) + 100 %>, <%= rand(150) + 100 %>) }
-    </style>
-  </head> 
-  <body>
-    <div id="box" class="box">
-      <div id="container" class="container">
-        <div class="inner_box">
-          <div class='column'>
-            <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2F<%= @app_url %>%2F&amp;layout=standard&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:80px;" allowTransparency="true"></iframe>
 
-            <div class='page_title'>
-              <%= Settings::MAKERS[@app_name.to_sym][:title] %>
-              <%= "[#{@posts.total_entries}]" if @posts && @posts.respond_to?(:total_entries) %>
-            </div>
+  </head>
+
+  <body> 
+    <div id="container"> 
+      <%= render :partial => 'shared/global' %>
+      <div id="content">
+         
+        <%= render :partial => 'shared/header' %>
+        <%= render :partial => 'shared/search' %>
+        <div id="results"> 
+          <div id="left"> 
             <%= yield %>
-            <div style="clear:both;"></div>
-          </div>
-        </div>
-      </div>
+          </div><!-- left --> 
+
+          <div id="rightcol">
             
-    <div id='footer'>
-      <%= render :partial => 'shared/footer' %>
-    </div>
-    
-  </body>
-</html>
+            <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2F<%= @app_url %>%2F&amp;layout=standard&amp;show_faces=true&amp;width=300&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:80px;" allowTransparency="true"></iframe>
+            
+            
+            <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-9814004731260896";
+            /* My-My Top Right Ad */
+            google_ad_slot = "8365127755";
+            google_ad_width = 300;
+            google_ad_height = 250;
+            //-->
+            </script>
+            <script type="text/javascript"
+            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+            </script>
+            <br /><br />
+            
+            <%= yield(:right) %>
+          </div><!-- rightcol --> 
+            <div class="clear"></div> 
+          </div><!-- results --> 
+        </div><!-- content --> 
+
+      </div><!-- container --> 
+    </body> 
+    </html>

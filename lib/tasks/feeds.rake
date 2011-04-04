@@ -126,13 +126,22 @@ task :parse_rss do
   end
 end
 
+desc 'prune_posts'
+task :prune_posts do
+  Post.destroy_all(["published < ?", 5.days.ago])
+end
+
 desc 'parse_google'
 task :parse_google do
   
   require 'rss/2.0'
   require 'json'
   
-  POST_COUNT = 200
+  p500 = %w{sfbay portland seattle newyork chicago dallas houston inlandempire phoenix sacramento washingtondc denver orangecounty boston sandiego minneapolis detroit newjersey lasvegas kansascity orlando miami stlouis tampa honolulu austin nashville nh}
+
+  p250 = %w{sanantonio columbus indianapolis raleigh providence cincinnati losangeles norfolk pittsburgh cnj spokane atlanta milwaukee maine philadelphia oklahomacity fortmyers hartford tulsa longisland southjersey cleveland fresno knoxville westpalmbeach tucson greenville richmond louisville boise albuquerque anchorage fortlauderdale hudsonvalley charlotte desmoines akroncanton madison springfield jacksonville}
+  
+  POST_COUNT = 100
   FEED_COUNT = 83 #(415/5)
   
   reg_exps =  Settings::MAKERS.values.collect{|el| Regexp.new(el[:reg_exp], true)}
@@ -147,7 +156,10 @@ task :parse_google do
   feed_list.each_with_index do |feed, idx|
     feed_last_modified = feed.last_modified.to_i
     # update the feed
-    url = feed.google_url(POST_COUNT)
+    post_count = 500 if p500.include?(feed.name)
+    post_count = 250 if p250.include?(feed.name)
+    post_count = POST_COUNT unless post_count
+    url = feed.google_url(post_count)
     #threads << Thread.new("t_#{idx}") {
       # threaded fetch & parse
       raw_content     = open(url).read
@@ -170,7 +182,7 @@ task :parse_google do
                        location: $3.strip.downcase, 
                        price: $4,  
                        published: Time.at(post['published']), 
-                       href: Post.short_post_url(post['alternate'].first['href']) }
+                       href: Post.short_post_url(post['alternate'].first['href']) } if (1920..Time.now.year).include?(year) && $4.to_i > 100
           end # post['title'].strip
         end # if posts['published']
       end

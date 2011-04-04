@@ -14,6 +14,7 @@ GEM
     curb (0.7.7.1)
     dalli (1.0.1)
     fastercsv (1.5.4)
+    hash_all (2.0.0)
     mysqlplus (0.1.2)
     rack (1.0.1)
     rack-cache (1.0)
@@ -35,6 +36,7 @@ DEPENDENCIES
   curb (= 0.7.7.1)
   dalli (= 1.0.1)
   fastercsv
+  hash_all (= 2.0.0)
   mysqlplus (= 0.1.2)
   rack-cache (= 1.0)
   rails (= 2.3.5)

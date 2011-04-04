@@ -80,7 +80,7 @@ module Settings
       :title=> 'Mercedes-Benz',
       :reg_exp =>'(^| )mercedes.?benz|mercedes($| )'},
     :mymini => {
-      :title=> 'Mini Cooper',
+      :title=> 'Mini',
       :reg_exp =>'(^| )mini.?cooper($| )'},
     :mymitsubishi => {
       :title=> 'Mitsubishi',
