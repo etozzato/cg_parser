@@ -6,7 +6,7 @@
       <%= @date = h_date(p.published) %>
     </div>
   <% end %> 
-  <a href="<%= p.url %>">
+  <a href="<%= p.post_url %>" target='new'>
     <div class="entry">
       <span class="date"><%= p.year %></span>
       <span class="desc"><%= p.title %></span>
