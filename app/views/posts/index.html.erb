@@ -1,23 +1,23 @@
-<p class='last_update'>Last Update <%= Time.now.strftime("%b %d at %I:%M %P") %></p>
-<div style="clear:both;"></div>
+<%= will_paginate(@posts, :class => 'pagination top') %>
 
-<%= will_paginate(@posts) %>
+<% @posts.each do |p| %>
+  <% if @date != h_date(p.published) %>
+    <div class="head">
+      <%= @date = h_date(p.published) %>
+    </div>
+  <% end %> 
+  <a href="<%= p.url %>">
+    <div class="entry">
+      <span class="date"><%= p.year %></span>
+      <span class="desc"><%= p.title %></span>
+      <span class="loc"><%= Feed.feeds[p.feed_name].name.titleize %>, <%= Feed.feeds[p.feed_name].state.titleize %></span>
+      <span class="price"><%= number_to_currency(p.price, :precision => 0) %></span>
+    </div>
+  </a> 
+<% end %>
 
-<% search_integrate do %>
+<%= will_paginate(@posts, :class => 'pagination bottom') %>
 
-  <%= render :partial => 'shared/search' %>
-
-  <% @posts.each do |p| %>
-   <p>
-      <%= p.year %>
-      <%= link_to(p.title, p.post_url, :target => '_new') %>
-      <%= number_to_currency(p.price, :precision => 0) %>
-      <%= h_date(p.published) %>
-      in <strong><%= Feed.feeds[p.feed_name].name.titleize %></strong>
-      (<strong><%= Feed.feeds[p.feed_name].state.titleize %></strong>)
-    </p>
-  <% end -%>
-
-  <%= will_paginate(@posts) %>
-
+<% content_for :right do %>
+ <%= render :partial => 'shared/my_links' %>
 <% end %>

@@ -1,0 +1,21 @@
+<div id='search'>
+  <% form_tag('/', :method => :get) do %>
+   <%= text_field_tag(:q, params[:q]) %>
+   <%= submit_tag('SEARCH') %>
+   <input type="hidden" id="price_min" name="price_min" value="<%= @price_filter[:min] %>">
+   <input type="hidden" id="price_max" name="price_max" value="<%= @price_filter[:max] %>">
+    <div class="slider_container">
+      <div id="rate_slider" class="slider" style="margin-bottom: 1px;">
+        <div style="left: 0px;" class="handler_min selected"></div>
+        <div style="left: 0px;" class="handler_max selected"></div>
+        <div id="slider_label" class="slider_label">
+          Price: 
+          <span id="rate_value_min" class="invisible" style="font-weight:bold;color:black"><%= @price_filter[:min] %></span> to
+          <span id="rate_value_max" class="invisible" style="font-weight:bold;color:black"><%= @price_filter[:max] %></span> USD
+        </div>
+      </div>
+    </div>
+   <br/> &nbsp;<%= link_to('reset search', root_path) if !params[:q].blank? || (@price_filter[:min] != @price_filter[:abs_min]) || (@price_filter[:max] != @price_filter[:abs_max]) %>
+  <% end -%>
+</div>
+<%= javascript_tag("init_sliders(#{@price_filter[:abs_min]},#{@price_filter[:abs_max]}, #{@price_filter[:min]}, #{@price_filter[:max]})") %>
