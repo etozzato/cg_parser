@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html> 
 <head> 
-  <title>My-My&trade; - <%= Settings::MAKERS[@app_name.to_sym][:title] %> for sale in the USA</title> 
+  <title>My-My&trade; - <%= @title = Settings::MAKERS[@app_name.to_sym][:title] %> for sale in the USA</title> 
   <meta name='description' value='Search for used and new cars: audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen in 115 aggregated craigslist feeds! Albany Allentown Albuquerque Anchorage Ann Arbor Asheville Atlanta Austin Bakersfield Baltimore Baton Rouge Birmingham Boise Boston Buffalo Burlington Champaign Urbana Charleston Charlotte Chicago Chico Cincinnati Cleveland Columbia, S.C. Columbus Dallas Delaware Dayton Denver / Boulder Des moines Detroit El Paso Eugene Fort Myers / SW Florida Fresno Grand Rapids Greensboro Harrisburg Hartford Houston Honolulu Humboldt Indianapolis Inland Empire Ithaca Jackson Jacksonville Kansas City Knoxville Little Rock Las Vegas Lexington Los Angeles Louisville Maine Madison Memphis Miami Milwaukee Minneapolis Mobile Modesto Montana Monterey Montgomery Nashville New Hampshire New Haven New Jersey New York City New Orleans Norfolk North Dakota Oklahoma City Omaha Orange County Orlando Pensacola Philadelphia Phoenix Pittsburgh Portland Puerto Rico Providence Raleigh Redding Reno Richmond Rochester Sacramento Salt Lake City San Antonio San Diego San Francisco Bay Area San Luis Obispo Santa Barbara Savannah Seattle-Tacoma Shreveport South Dakota Spokane St. Louis Stockton Syracuse Tallahassee Tampa Toledo Tucson Tulsa Washington D.C. Western Massachusetts West Palm Beach West Virginia Wichita Wyoming' /> 
   <meta name='keywords' value='new and used cars, audi bmw ferrari ford jeep landrover toyota volvo acura cadillac chevrolet chrysler dodge gmc honda hummer jaguar lexus lotus maserati mazda mercedes-benz mini mitsubishi nissan porsche rover saab smart subaru volkswagen' /> 
   <%= javascript_include_tag :all, :cache => true %>
@@ -37,6 +37,12 @@
             
             <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2F<%= @app_url %>%2F&amp;layout=standard&amp;show_faces=true&amp;width=300&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=80" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:80px;" allowTransparency="true"></iframe>
             
+            <meta property="og:title" content="<%= @title %>" />
+            <meta property="og:type" content="blog" />
+            <meta property="og:url" content="http://<%= @app_url %>/" />
+            <meta property="og:image" content="http://<%= @app_url %>/images/header-<%= Settings::MAKERS[@app_name.to_sym][:title].downcase %>.png" />
+            <meta property="og:site_name" content="<%= @app_url %>" />
+            <meta property="fb:admins" content="630930558" />
             
             <script type="text/javascript"><!--
             google_ad_client = "ca-pub-9814004731260896";
