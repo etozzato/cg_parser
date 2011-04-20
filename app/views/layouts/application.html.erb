@@ -17,12 +17,12 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
     })();
-    </script>
-
+   </script>
+   <%= x_tag %>
   </head>
 
   <body> 
-    <div id="container"> 
+    <div id="container">  
       <%= render :partial => 'shared/global' %>
       <div id="content">
          
@@ -44,17 +44,7 @@
             <meta property="og:site_name" content="<%= @app_url %>" />
             <meta property="fb:admins" content="630930558" />
             
-            <script type="text/javascript"><!--
-            google_ad_client = "ca-pub-9814004731260896";
-            /* My-My Top Right Ad */
-            google_ad_slot = "8365127755";
-            google_ad_width = 300;
-            google_ad_height = 250;
-            //-->
-            </script>
-            <script type="text/javascript"
-            src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-            </script>
+            <%= javascript_include_tag("http://pagead2.googlesyndication.com/pagead/show_ads.js") unless Rails.env.development? %>
             <br /><br />
             
             <%= yield(:right) %>
