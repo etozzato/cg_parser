@@ -40,8 +40,8 @@ function MM_jumpMenu(targ,selObj,restore){
 	if (restore) selObj.selectedIndex=0;
 }
 
-google_ad_client = "ca-pub-9814004731260896";
-/* My-My Top Right Ad */
-google_ad_slot = "8365127755";
-google_ad_width = 300;
-google_ad_height = 250;
+// google_ad_client = "ca-pub-9814004731260896";
+// /* My-My Top Right Ad */
+// google_ad_slot = "8365127755";
+// google_ad_width = 300;
+// google_ad_height = 250;
