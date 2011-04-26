@@ -42,10 +42,14 @@
             <meta property="og:image" content="http://<%= @app_url %>/images/header-<%= Settings::MAKERS[@app_name.to_sym][:title].downcase %>.png" />
             <meta property="og:site_name" content="<%= @app_url %>" />
             <meta property="fb:admins" content="630930558" />
-            
-            <%= x_tag %>
-            <%#= javascript_include_tag("http://pagead2.googlesyndication.com/pagead/show_ads.js") if Rails.env.development? %>
-            <br /><br />
+            <% if Rails.env.development? %>
+              <div class='development_ad'>&nbsp;</div>
+            <% else %>
+              <%= x_tag %>
+            <% end %>  
+            <br />
+            <%= link_to 'Advertise here!', 'http://my-my.us/advertise/'%>
+            <br />
             
             <%= yield(:right) %>
           </div><!-- rightcol --> 
