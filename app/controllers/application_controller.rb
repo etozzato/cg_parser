@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
   def set_app_name
     if Rails.env.development?
-      @app_name ||= Settings::MAKERS.keys.at(rand(Settings::MAKERS.size)).to_s
+      @app_name ||= 'myford'#Settings::MAKERS.keys.at(rand(Settings::MAKERS.size)).to_s
       @app_url  ||= 'localhost'
     else
       @app_name ||= request.env['SERVER_NAME'].gsub(/^www\./,'').gsub(/^stage\./,'').gsub(/\.us$/,'').clean

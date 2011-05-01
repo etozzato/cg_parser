@@ -1,6 +1,6 @@
 <div id="search"> 
   <div class="search-label">What are you looking for?</div> 
-  <% form_tag('/', :method => :post, :id => 'mainsearch') do %>
+  <% form_tag('/', :method => :get, :id => 'mainsearch') do %>
   <%= text_field_tag(:q, params[:q], :id => 'keyword') %>
     <div id="price-option"> 
       <div class="heading">Maximum price</div> 
