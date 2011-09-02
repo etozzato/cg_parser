@@ -208,6 +208,10 @@ body{
 	color:white;
 	background:#FF6600;
 	-moz-border-radius: 3px; -webkit-border-radius:3px; border-radius:3px;
+}
 
-	
+div.development_ad {
+	width:300px;
+	height:250px;
+	background:#ebebeb;
 }

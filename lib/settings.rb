@@ -106,7 +106,6 @@ module Settings
     :myvolkswagen => {
       :title=> 'Volkswagen',
       :reg_exp =>'(^| )volkswagen|vw($| )'},
-
   }
   
   # APPLICATIONS.each do |app|

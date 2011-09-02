@@ -7,11 +7,11 @@ module DataLoader
     # Ruby 1.9 compat for FasterCSV (painful)
     # http://matthewbass.com/2008/01/05/csv-transmogrifies-into-fastercsv-in-ruby-19/
     require 'csv'
-    # if CSV.const_defined? :Reader
-    #   require 'faster_csv'  # For CSV data files
-    # else
-    #   FasterCSV = CSV
-    # end
+    if CSV.const_defined? :Reader
+      require 'faster_csv'  # For CSV data files
+    else
+      FasterCSV = CSV
+    end
 
     def load_constants(table_name, column_name=:id, options={})
       load_csv_file('db/constants', table_name, column_name, options)
