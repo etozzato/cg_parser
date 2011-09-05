@@ -7,10 +7,9 @@ class ApplicationController < ActionController::Base
 
   private
   def set_app_name
-    #match = /(?<appname>\w+)(?<appbase>.+)/.match(request.env['SERVER_NAME'])
-    match = /(\w+)(.+)/.match(request.env['SERVER_NAME'])
+    match = /(\w+)/.match(request.env['SERVER_NAME'])
     raise AppNotFound unless Settings::APPLICATIONS.include? match[0]
-    @app_name = match[1]
+    @app_name = match[0]
     @app_url = request.env['SERVER_NAME']
   end
   
