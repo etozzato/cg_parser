@@ -2,7 +2,7 @@ module Settings
 
   ATOM_URL = 'http://www.google.com/reader/public/atom/user/14501400005472834064/bundle/mymy'
 
-  AppBase = 'http://my-my.us'
+  AppBase = '.my-my.us'
 
   # APPLICATIONS = %w(alfa-romeo my-audi my-bmw my-ferrari my-fiat my-ford my-jeep my-landrover my-toyota my-volvo myacura mycadillac mychevrolet mychrysler mydodge mygmc myhonda myhummer myjaguar mylexus mylotus mymaserati mymazda mymercedes-benz mymini mymitsubishi mynissan myporsche myrover mysaab mysmart mysubaru myvolkswagen)
 
