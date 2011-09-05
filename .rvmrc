@@ -1,0 +1,15 @@
+gemset_name=mymy
+ruby_version=1.9.2-head
+rubygems_version=1.8.5
+gems=('bundler 1.0.18')
+
+export GIT_SSL_NO_VERIFY=true
+
+rvm use $ruby_version@$gemset_name --create --install
+[ $(gem -v) = $rubygems_version ] || rvm rubygems $rubygems_version
+for g in "${gems[@]}"; do
+  read n v <<< $(echo $g | awk '{print $1 " " $2}')
+  gem list ${n} -v${v} -i >> /dev/null
+  [ $? -eq 0 ] || gem install ${n} -v${v} --no-ri --no-rdoc
+done
+bundle update
