@@ -5,7 +5,7 @@
       <select name="network" id="networkselector" onChange="MM_jumpMenu('parent',this,1)"> 
         <option selected="selected" value="#">Select a My-My Site</option> 
         <% Settings::APPLICATIONS.each do |maker| %>
-          <option value="<%= "http://#{maker}#{@app_base}" %>"><%= Settings::MAKERS[maker.to_sym][:title] %></option>
+          <option value="<%= "http://#{maker}#{Settings::AppBase}" %>"><%= Settings::MAKERS[maker.to_sym][:title] %></option>
         <% end %>
       </select> 
       <label>Everything you need to find your next car&trade;</label> 

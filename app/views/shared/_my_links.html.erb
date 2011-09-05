@@ -1,6 +1,6 @@
 <div id="network-links"> 
   <h2>More Autos on My-My Network:</h2>
   <% Settings::APPLICATIONS.each do |maker| %>
-    <%= link_to Settings::MAKERS[maker.to_sym][:title], "http://#{maker}#{@app_base}" %>
+    <%= link_to Settings::MAKERS[maker.to_sym][:title], "http://#{maker}#{Settings::AppBase}" %>
   <% end %>
 </div>

@@ -1,0 +1,2 @@
+class AppNotFound < StandardError
+end
