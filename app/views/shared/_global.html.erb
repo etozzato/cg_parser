@@ -4,40 +4,9 @@
       <div id="networklabel"><a href='http://my-my.us/'><img src="/images/my-my-network.png" width="133" height="12" /></a></div> 
       <select name="network" id="networkselector" onChange="MM_jumpMenu('parent',this,1)"> 
         <option selected="selected" value="#">Select a My-My Site</option> 
-        <option value="http://alfa-romeo.us/">My Alfa-Romeo</option> 
-        <option value="http://my-audi.us/">My Audi</option> 
-        <option value="http://my-bmw.us/">My BMW</option> 
-        <option value="http://my-ferrari.us/">My Ferrari</option> 
-        <option value="http://my-fiat.us/">My Fiat</option> 
-        <option value="http://my-ford.us/">My Ford</option> 
-        <option value="http://my-jeep.us/">My Jeep</option> 
-        <option value="http://my-landrover.us/">My Landrover</option> 
-        <option value="http://my-toyota.us/">My Toyota</option> 
-        <option value="http://my-volvo.us/">My Volvo</option> 
-        <option value="http://myacura.us/">My Acura</option> 
-        <option value="http://mycadillac.us/">My Cadillac</option> 
-        <option value="http://mychevrolet.us/">My Chevrolet</option> 
-        <option value="http://mychrysler.us/">My Chrysler</option> 
-        <option value="http://mydodge.us/">My Dodge</option> 
-        <option value="http://mygmc.us/">My GMC</option> 
-        <option value="http://myhonda.us/">My Honda</option> 
-        <option value="http://myhummer.us/">My Hummer</option> 
-        <option value="http://myjaguar.us/">My Jaguar</option> 
-        <option value="http://mylexus.us/">My Lexus</option> 
-        <option value="http://mylotus.us/">My Lotus</option> 
-        <option value="http://mymaserati.us/">My Maserati</option> 
-        <option value="http://mymazda.us/">My Mazda</option> 
-        <option value="http://mymercedes-benz.us/">My Mercedes-Benz</option> 
-        <option value="http://mymini.us/">My Mini</option> 
-        <option value="http://mymitsubishi.us/">My Mitsubishi</option> 
-        <option value="http://mynissan.us/">My Nissan</option> 
-        <option value="http://myporsche.us/">My Porsche</option> 
-        <option value="http://myrover.us/">My Rover</option> 
-        <option value="http://mysaab.us/">My Saab</option> 
-        <option value="http://mysmart.us/">My Smart</option> 
-        <option value="http://mysubaru.us/">My Subaru</option> 
-        <option value="http://myvolkswagen.us/">My Volkswagen</option> 
-
+        <% Settings::APPLICATIONS.each do |maker| %>
+          <option value="<%= "http://#{maker}#{@app_base}" %>"><%= Settings::MAKERS[maker.to_sym][:title] %></option>
+        <% end %>
       </select> 
       <label>Everything you need to find your next car&trade;</label> 
     </form> 

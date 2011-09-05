@@ -26,5 +26,10 @@
     google.setOnLoadCallback(drawVisualization);
   </script>
 </head>
+<h2>Distribution of <%= @title = Settings::MAKERS[@app_name.to_sym][:title] %> for sale in the US</h2>
 <body style="font-family: Arial;border: 0 none;">
 <div id="visualization" style="width: 800px; height: 400px;"></div>
+
+<% content_for :right do %>
+ <%= render :partial => 'shared/my_links' %>
+<% end %>

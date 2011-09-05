@@ -44,14 +44,12 @@
             <meta property="og:site_name" content="<%= @app_url %>" />
             <meta property="fb:admins" content="630930558" />
             <% if Rails.env.development? %>
-              <div class='development_ad'>&nbsp;</div>
+              <div class='development_ad'>
+                <%= link_to image_tag('ad.png'), 'http://my-my.us/advertise/'%>
+              </div>
             <% else %>
               <%= x_tag %>
             <% end %>  
-            <br />
-            <%= link_to 'Advertise here!', 'http://my-my.us/advertise/'%>
-            <br />
-            
             <%= yield(:right) %>
           </div><!-- rightcol --> 
             <div class="clear"></div> 
@@ -59,6 +57,6 @@
         </div><!-- content --> 
 
       </div><!-- container -->
-      <%= search_integrate_exec %>
+      <%#= search_integrate_exec %>
     </body> 
     </html>
