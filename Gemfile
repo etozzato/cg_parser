@@ -1,5 +1,5 @@
 source :rubygems
-gem 'rails', '2.3.9'
+gem 'rails', '2.3.5'
 gem 'rack-cache', '1.0'
 gem 'dalli', '1.0.1'
 gem 'will_paginate', '~> 2.3.16'
